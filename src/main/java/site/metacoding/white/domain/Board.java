@@ -13,10 +13,11 @@ import lombok.Setter;
 @Getter
 @Entity
 public class Board {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // PK 설정
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment, identity를 걸어야 해당 db번호전략을 따라간다
     private Long id;
     private String title;
     @Column(length = 1000)
     private String content;
+    private String author;
 }
