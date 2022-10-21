@@ -1,5 +1,8 @@
 package site.metacoding.white.web;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,11 @@ public class BoardApiController {
 
     private final BoardService boardService;
 
+    @GetMapping("/board")
+    public List<Board> findAll() {
+        return boardService.findAll();
+    }
+
     @GetMapping("/board/{id}")
     public Board findById(@PathVariable Long id) {
         return boardService.findById(id);
@@ -31,6 +39,12 @@ public class BoardApiController {
     @PostMapping("/board")
     public String save(@RequestBody Board board) {
         boardService.save(board);
+        return "ok";
+    }
+
+    @DeleteMapping("/board/{id}")
+    public String delete(@PathVariable Long id) {
+        boardService.delete(id);
         return "ok";
     }
 }
