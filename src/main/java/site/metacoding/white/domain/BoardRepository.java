@@ -15,4 +15,12 @@ public class BoardRepository {
     public void save(Board board) {
         em.persist(board);// insert 됨(insert쿼리) , persist=영속화
     }
+
+    // JPQL 문법
+    public Board findById(Long id) {
+        Board boardPS = em.createQuery("select b from Board b where b.id = :id", Board.class)
+                .setParameter("id", id)
+                .getSingleResult();
+        return boardPS;
+    }
 }
