@@ -8,6 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.white.domain.Board;
 import site.metacoding.white.domain.BoardRepository;
+import site.metacoding.white.dto.BoardReqDto.BoardSaveDto;
+
+//서비스의 기능
+//트랜젝션관리
+//DTO 변환해서 컨트롤러에게 돌려줘야함
 
 @RequiredArgsConstructor
 @Service
@@ -15,17 +20,22 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    public List<Board> findAll() {
-        return boardRepository.findAll();
-    }
-
     @Transactional // jpa방식에는 반드시 걸어줘야한다
-    public void save(Board board) {// 필요업지만 관리상 만들어줘야한다
+    public void save(BoardSaveDto boardSaveDto) {
+        Board board = new Board();
+        board.setTitle(boardSaveDto.getTitle());
+        board.setContent(boardSaveDto.getContent());
+        board.setUser(boardSaveDto.getUser());
         boardRepository.save(board);
     }
 
+    @Transactional(readOnly = true)
     public Board findById(Long id) {
-        return boardRepository.findById(id);
+        Board boardPS = boardRepository.findById(id);
+        boardPS.getUser().getUsername();// Lazy 로딩됨. (근데 Eager이면 이미 로딩되서 select 두번 날라감)
+        // 4. user select 됨?
+        System.out.println("서비스단에서 지연로딩 함. 왜? 여기까지는 디비커넥션이 유지되니까");
+        return boardPS;
     }
 
     @Transactional
@@ -33,8 +43,11 @@ public class BoardService {
         Board boardPS = boardRepository.findById(id);// 영속화 된 데이터를 수정한다
         boardPS.setTitle(board.getTitle());
         boardPS.setContent(board.getContent());
-        boardPS.setAuthor(board.getAuthor());
     }// 트렌직션 종료시 ->더티체킹을 함
+
+    public List<Board> findAll() {
+        return boardRepository.findAll();
+    }
 
     @Transactional
     public void delete(Long id) {
