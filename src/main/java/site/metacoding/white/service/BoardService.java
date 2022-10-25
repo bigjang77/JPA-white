@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.white.domain.Board;
 import site.metacoding.white.domain.BoardRepository;
-import site.metacoding.white.dto.BoardReqDto.BoardSaveDto;
+import site.metacoding.white.dto.BoardReqDto.BoardSaveReqDto;
 
 //서비스의 기능
 //트랜젝션관리
@@ -21,11 +21,11 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     @Transactional // jpa방식에는 반드시 걸어줘야한다
-    public void save(BoardSaveDto boardSaveDto) {
+    public void save(BoardSaveReqDto boardSaveReqDto) {
         Board board = new Board();
-        board.setTitle(boardSaveDto.getTitle());
-        board.setContent(boardSaveDto.getContent());
-        board.setUser(boardSaveDto.getUser());
+        board.setTitle(boardSaveReqDto.getTitle());
+        board.setContent(boardSaveReqDto.getContent());
+        board.setUser(boardSaveReqDto.getUser());
         boardRepository.save(board);
     }
 
