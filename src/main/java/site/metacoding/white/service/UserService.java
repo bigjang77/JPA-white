@@ -25,7 +25,6 @@ public class UserService {
     @Transactional // 트랜잭션을 붙이지 않으면 영속화 되어있는 객체가 flush가 안됨.
     public JoinRespDto save(JoinReqDto joinReqDto) {
         User userPS = userRepository.save(joinReqDto.toEntity());
-        System.out.println("ccc : " + userPS.getId());
         return new JoinRespDto(userPS);
     }
 

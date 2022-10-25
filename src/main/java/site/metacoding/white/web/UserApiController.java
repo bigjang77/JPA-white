@@ -2,8 +2,6 @@ package site.metacoding.white.web;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +26,6 @@ public class UserApiController {
     public ResponseDto<?> save(@RequestBody JoinReqDto joinReqDto) {
         JoinRespDto joinRespDto = userService.save(joinReqDto);
         return new ResponseDto<>(1, "ok", joinRespDto);
-        // insert됐을때created(201)
     }
 
     @PostMapping("/login")

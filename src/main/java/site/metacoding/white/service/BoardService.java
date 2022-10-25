@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.white.domain.Board;
 import site.metacoding.white.domain.BoardRepository;
 import site.metacoding.white.dto.BoardReqDto.BoardSaveReqDto;
+import site.metacoding.white.dto.BoardRespDto.BoardSaveRespDto;
 
 //서비스의 기능
 //트랜젝션관리
@@ -21,12 +22,14 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     @Transactional // jpa방식에는 반드시 걸어줘야한다
-    public void save(BoardSaveReqDto boardSaveReqDto) {
-        Board board = new Board();
-        board.setTitle(boardSaveReqDto.getTitle());
-        board.setContent(boardSaveReqDto.getContent());
-        board.setUser(boardSaveReqDto.getUser());
-        boardRepository.save(board);
+    public BoardSaveRespDto save(BoardSaveReqDto boardSaveReqDto) {
+        // 핵심로직
+        Board boardPS = boardRepository.save(boardSaveReqDto.toEntity());
+
+        // DTO전환
+        BoardSaveRespDto boardSaveRespDto = new BoardSaveRespDto(boardPS);
+
+        return boardSaveRespDto;
     }
 
     @Transactional(readOnly = true)
@@ -41,8 +44,7 @@ public class BoardService {
     @Transactional
     public void update(Long id, Board board) {
         Board boardPS = boardRepository.findById(id);// 영속화 된 데이터를 수정한다
-        boardPS.setTitle(board.getTitle());
-        boardPS.setContent(board.getContent());
+        boardPS.update(board.getTitle(), board.getContent());
     }// 트렌직션 종료시 ->더티체킹을 함
 
     public List<Board> findAll() {
