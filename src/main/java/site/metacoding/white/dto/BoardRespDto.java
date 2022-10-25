@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import site.metacoding.white.domain.Board;
 import site.metacoding.white.domain.User;
+import site.metacoding.white.dto.BoardRespDto.BoardSaveRespDto.UserDto;
 
 public class BoardRespDto {
 
@@ -36,5 +37,33 @@ public class BoardRespDto {
             this.user = new UserDto(board.getUser());
         }
 
+    }
+
+    @Setter
+    @Getter
+    public static class BoardFindByIdRespDto {
+        private Long id;
+        private String title;
+        private String content;
+        private UserDto user;
+
+        public BoardFindByIdRespDto(Board board) {
+            this.id = board.getId();
+            this.title = board.getTitle();
+            this.content = board.getContent();
+            this.user = new UserDto(board.getUser());
+        }
+    }
+
+    @Setter
+    @Getter
+    public static class BoardUpdateRespDto {
+        private String title;
+        private String content;
+
+        public BoardUpdateRespDto(Board board) {
+            this.title = board.getTitle();
+            this.content = board.getContent();
+        }
     }
 }

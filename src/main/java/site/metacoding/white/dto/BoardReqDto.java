@@ -16,20 +16,20 @@ public class BoardReqDto {
         public Board toEntity() {
             return Board.builder().title(title).content(content).user(sessionUser.toEntity()).build();
         }
-
-        // // 클라이언트한테 받는게 아님!!
-        // @Setter
-        // @Getter
-        // public class ServiceDto {
-        // private User user;
-        // }
-
-        // private ServiceDto serviceDto;
-
-        // public void newInstance() {
-        // serviceDto = new ServiceDto();
-        // }
     }
 
+    @Setter
+    @Getter
+    public static class BoardFindByIdReqDto {
+        private Long id;
+    }
+
+    @Setter
+    @Getter
+    public static class BoardUpdateReqDto {
+        private String title;
+        private String content;
+        private SessionUser sessionUser;
+    }
     // DTO는 여기다가 추가로
 }
