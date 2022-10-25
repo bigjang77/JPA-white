@@ -48,9 +48,13 @@ public class BoardService {
 
     @Transactional
     public BoardUpdateRespDto update(BoardFindByIdReqDto boardFindByIdReqDto, BoardUpdateReqDto boardUpdateReqDto) {
+        // 핵심로직
         Board boardPS = boardRepository.findById(boardFindByIdReqDto.getId());// 영속화 된 데이터를 수정한다
         boardPS.update(boardUpdateReqDto.getTitle(), boardUpdateReqDto.getContent());
+
+        // DTO 전환
         BoardUpdateRespDto boardUpdateRespDto = new BoardUpdateRespDto(boardPS);
+
         return boardUpdateRespDto;
     }// 트렌직션 종료시 ->더티체킹을 함
 
