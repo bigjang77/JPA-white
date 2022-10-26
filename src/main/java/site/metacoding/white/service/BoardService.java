@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import site.metacoding.white.domain.Board;
 import site.metacoding.white.domain.BoardRepository;
 import site.metacoding.white.dto.BoardReqDto.BoardSaveReqDto;
@@ -22,7 +21,6 @@ import site.metacoding.white.dto.BoardRespDto.BoardUpdateRespDto;
 //트랜젝션관리
 //DTO 변환해서 컨트롤러에게 돌려줘야함
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
 public class BoardService {

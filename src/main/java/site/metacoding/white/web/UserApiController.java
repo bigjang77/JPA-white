@@ -21,6 +21,10 @@ public class UserApiController {
     private final UserService userService;
     private final HttpSession session;
 
+    // 회원정보 수정
+
+    // 회원정보 보기
+
     // joinDto 만들어서 실습해보기
     @PostMapping("/join")
     public ResponseDto<?> save(@RequestBody JoinReqDto joinReqDto) {

@@ -1,5 +1,8 @@
 package site.metacoding.white.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -26,6 +30,10 @@ public class Board {
     // FK가 만들어짐 user_id
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+
+    // 조회를 위해서만 필요함
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY) // 컬럼이 아니라고 설정해아함 기본전략이 lazy=들고올것이 많아서
+    private List<Comment> connetns = new ArrayList<>();
 
     @Builder
     public Board(Long id, String title, String content, User user) {
