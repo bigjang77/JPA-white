@@ -32,7 +32,6 @@ public class BoardRepository {
         } catch (Exception e) {
             return Optional.empty();
         }
-
     }
 
     public void deleteById(Long id) {

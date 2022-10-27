@@ -23,4 +23,12 @@ public class UserReqDto {
         private String username;
         private String password;
     }
+
+    @Setter
+    @Getter
+    public static class UserUpdateReqDto {// 내부클래스를 외부에서 쓰고싶으면 static붙이기
+        private Long id;
+        private String username;
+        private String password;
+    }
 }

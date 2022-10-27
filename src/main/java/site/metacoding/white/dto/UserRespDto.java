@@ -18,4 +18,44 @@ public class UserRespDto {
             this.username = user.getUsername();
         }
     }
+
+    @Setter
+    @Getter
+    public static class UserAllRespDto {
+        private Long id;
+        private String username;
+
+        // 응답의 DTO는 생성자로 처리한다.
+        public UserAllRespDto(User user) {
+            this.id = user.getId();
+            this.username = user.getUsername();
+        }
+    }
+
+    @Setter
+    @Getter
+    public static class UserDetailRespDto {
+        private Long id;
+        private String username;
+
+        // 응답의 DTO는 생성자로 처리한다.
+        public UserDetailRespDto(User user) {
+            this.id = user.getId();
+            this.username = user.getUsername();
+        }
+    }
+
+    @Setter
+    @Getter
+    public static class UserUpdateRespDto {
+        private Long id;
+        private String username;
+
+        // 응답의 DTO는 생성자로 처리한다.
+        public UserUpdateRespDto(User user) {
+            this.id = user.getId();
+            this.username = user.getUsername();
+        }
+    }
+
 }
