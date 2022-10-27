@@ -33,7 +33,7 @@ public class Board {
 
     // 조회를 위해서만 필요함
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY) // 컬럼이 아니라고 설정해아함 기본전략이 lazy=들고올것이 많아서
-    private List<Comment> connetns = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
     @Builder
     public Board(Long id, String title, String content, User user) {

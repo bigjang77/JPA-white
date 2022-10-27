@@ -20,10 +20,8 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final BoardRepository boardRepository;
 
-    @Transactional // jpa방식에는 반드시 걸어줘야한다
+    @Transactional
     public CommentSaveRespDto save(CommentSaveReqDto commentSaveReqDto) {
-
-        // 1. Board가 있는지 확인
         Optional<Board> boardOP = boardRepository.findById(commentSaveReqDto.getBoardId());
         if (boardOP.isPresent()) {
             Comment comment = commentSaveReqDto.toEntity(boardOP.get());
@@ -31,7 +29,7 @@ public class CommentService {
             CommentSaveRespDto commentSaveRespDto = new CommentSaveRespDto(commentPS);
             return commentSaveRespDto;
         } else {
-            throw new RuntimeException("게시글이 없어서 댓글을 달 수 없습니다");
+            throw new RuntimeException("게시글이 없어서 댓글을 쓸 수 없습니다.");
         }
     }
 

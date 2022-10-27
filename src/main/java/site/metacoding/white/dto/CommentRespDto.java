@@ -24,7 +24,7 @@ public class CommentRespDto {
             private String username;
 
             public UserDto(User user) {
-                this.id = user.getId();// Lazy Loading
+                this.id = user.getId(); // Lazy Loading
                 this.username = user.getUsername();
             }
         }
@@ -35,7 +35,7 @@ public class CommentRespDto {
             private Long id;
 
             public BoardDto(Board board) {
-                this.id = board.getId();// Lazy Loading
+                this.id = board.getId(); // Lazy Loading
             }
         }
 

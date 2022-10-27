@@ -15,16 +15,14 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 public class Comment {
-    @Id // PK 설정
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment, identity를 걸어야 해당 db번호전략을 따라간다
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
 
-    // User 누가 썻는지
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    // board 어디에 썻는지
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
 

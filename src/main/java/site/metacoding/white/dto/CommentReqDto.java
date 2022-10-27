@@ -11,12 +11,15 @@ public class CommentReqDto {
     @Getter
     public static class CommentSaveReqDto {
         private String content;
-        private SessionUser sessionuser;// 서비스로직
-        // 보드도 필요한데?
         private Long boardId;
+        private SessionUser sessionUser; // 서비스 로직
 
         public Comment toEntity(Board board) {
-            return Comment.builder().content(content).board(board).user(sessionuser.toEntity()).build();
+            return Comment.builder()
+                    .content(content)
+                    .board(board)
+                    .user(sessionUser.toEntity())
+                    .build();
         }
     }
 }
