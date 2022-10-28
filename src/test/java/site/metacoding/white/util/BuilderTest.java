@@ -1,4 +1,4 @@
-package site.metacoding.white.utill;
+package site.metacoding.white.util;
 
 import org.junit.jupiter.api.Test;
 
