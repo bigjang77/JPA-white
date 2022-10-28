@@ -65,6 +65,7 @@ public class BoardApiController {
         }
         boardService.deleteById(id);
         return new ResponseDto<>(1, "성공", null);
+
     }
 
     // @GetMapping("/v2/board/{id}")

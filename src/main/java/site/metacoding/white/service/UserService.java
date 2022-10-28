@@ -88,5 +88,9 @@ public class UserService {
         } else {
             throw new RuntimeException("해당" + id + "로 수정을 할 수 없습니다.");
         }
+    }
+
+    public void deleteById(Long id) {
+
     }// 트렌직션 종료시 ->더티체킹을 함
 }

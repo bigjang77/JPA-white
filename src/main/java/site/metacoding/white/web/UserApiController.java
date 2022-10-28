@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,13 @@ public class UserApiController {
 
     private final UserService userService;
     private final HttpSession session;
+
+    // 회원탈퇴
+    @DeleteMapping("/user{id}")
+    public ResponseDto<?> deleteById(@PathVariable Long id) {
+        userService.deleteById(id);
+        return new ResponseDto<>(1, "성공", null);
+    }
 
     // 회원정보 수정
     @PutMapping("/user/{id}")

@@ -23,6 +23,7 @@ import com.jayway.jsonpath.JsonPath;
 
 import site.metacoding.white.dto.UserReqDto.JoinReqDto;
 import site.metacoding.white.dto.UserReqDto.LoginReqDto;
+import site.metacoding.white.dto.UserRespDto.UserAllRespDto;
 import site.metacoding.white.service.UserService;
 
 @ActiveProfiles("test")

@@ -3,6 +3,7 @@ package site.metacoding.white.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -31,9 +35,14 @@ public class Board {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    // 조회를 위해서만 필요함
-    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY) // 컬럼이 아니라고 설정해아함 기본전략이 lazy=들고올것이 많아서
+    // 조회를 위해서만 필요함 컬럼이 아니라고 설정해아함 기본전략이 lazy=들고올것이많아서
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
     private List<Comment> comments = new ArrayList<>();
+
+    // 테스트할때 보드
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+    }
 
     @Builder
     public Board(Long id, String title, String content, User user) {
