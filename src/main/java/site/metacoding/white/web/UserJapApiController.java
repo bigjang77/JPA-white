@@ -39,15 +39,15 @@ public class UserJapApiController {
         return new ResponseDto<>(1, "성공", userPS);
     }
 
-    @PostMapping("/jpa/login")
-    public ResponseDto<?> login(@RequestBody User user) {
-        User userPS = userJpaRepository.findByUsername(user.getUsername());
-        if (userPS.getPassword().equals(user.getPassword())) {
-            return new ResponseDto<>(1, "성공", userPS);
-        } else {
-            throw new RuntimeException("비밀번호 틀림");
-        }
-    }
+    // @PostMapping("/jpa/login")
+    // public ResponseDto<?> login(@RequestBody User user) {
+    // User userPS = userJpaRepository.findByUsername(user.getUsername());
+    // if (userPS.getPassword().equals(user.getPassword())) {
+    // return new ResponseDto<>(1, "성공", userPS);
+    // } else {
+    // throw new RuntimeException("비밀번호 틀림");
+    // }
+    // }
 
     @GetMapping("/jpa/user")
     public ResponseDto<?> findAll(Integer page) {
