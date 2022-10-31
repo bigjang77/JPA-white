@@ -107,7 +107,7 @@ public class CommentApiControllerTest {
 
         // when
         ResultActions resultActions = mvc
-                .perform(MockMvcRequestBuilders.post("/comment").content(body)
+                .perform(MockMvcRequestBuilders.post("/s/comment").content(body)
                         .contentType(APPLICATION_JSON).accept(APPLICATION_JSON)
                         .session(session));
 

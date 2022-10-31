@@ -25,12 +25,9 @@ public class BoardApiController {
     private final BoardService boardService;
     private final HttpSession session;
 
-    @PostMapping("/board")
+    @PostMapping("/s/board")
     public ResponseDto<?> save(@RequestBody BoardSaveReqDto boardSaveReqDto) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            throw new RuntimeException("로그인을 진행해주세요");
-        }
         boardSaveReqDto.setSessionUser(sessionUser);
         BoardSaveRespDto boardSaveRespDto = boardService.save(boardSaveReqDto); // 서비스에는 단 하나의 객체만 전달한다.
         return new ResponseDto<>(1, "성공", boardSaveRespDto);
@@ -47,7 +44,7 @@ public class BoardApiController {
         return new ResponseDto<>(1, "성공", boardService.findAll());
     }
 
-    @PutMapping("/board/{id}")
+    @PutMapping("/s/board/{id}")
     public ResponseDto<?> update(@PathVariable Long id, @RequestBody BoardUpdateReqDto boardUpdateReqDto) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         if (sessionUser == null) {
@@ -57,13 +54,11 @@ public class BoardApiController {
         return new ResponseDto<>(1, "성공", boardService.update(boardUpdateReqDto));
     }
 
-    @DeleteMapping("/board/{id}")
+    @DeleteMapping("/s/board/{id}")
     public ResponseDto<?> deleteById(@PathVariable Long id) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            throw new RuntimeException("로그인을 진행해주세요");
-        }
-        boardService.deleteById(id);
+
+        boardService.deleteById(id, sessionUser.getId());// 권한 관련된 파라메터는 2번째 파라메터로 넘긴다
         return new ResponseDto<>(1, "성공", null);
 
     }
